@@ -2,8 +2,21 @@ import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import { css } from '@emotion/core'
 import query from '../../queries/fetchTransactionList'
+import gql from 'graphql-tag'
 
 class TransactionList extends Component {
+  onTransactionDelete = (id) => {
+    // eslint-disable-next-line react/prop-types
+    this.props.mutate({ variables: { id } })
+    // eslint-disable-next-line react/prop-types
+      .then(() => this.props.data.refetch())
+  }
+  onTransactionEdit = (id) => {
+    // eslint-disable-next-line react/prop-types
+    this.props.mutate({ variables: { id } })
+    // eslint-disable-next-line react/prop-types
+      .then(() => this.props.data.refetch())
+  }
   renderList = () => {
     // eslint-disable-next-line react/prop-types
     return this.props.data.transactions.reverse().map(transaction => {
@@ -13,6 +26,9 @@ class TransactionList extends Component {
           <span css={transactionDetail}>Description: {transaction.description} </span>
           <span css={transactionDetail}>MerchantId: {transaction.merchant_id} </span>
           <span css={transactionDetail}>Amount: <span css={amount}>{transaction.amount}</span> </span>
+          {/* eslint-disable-next-line react/jsx-sort-props */}
+          <button css={transactionButton} onClick={() => this.onTransactionEdit(transaction.id)}>Edit</button>
+          <button css={transactionButton} onClick={() => this.onTransactionDelete(transaction.id)}>Delete</button>
         </li>
       )
     })
@@ -42,6 +58,14 @@ class TransactionList extends Component {
   }
 }
 
+const mutation = gql`
+  mutation DeleteTransaction($id: String) {
+    deleteTransaction(id: $id) {
+      id
+    }
+  }
+`
+
 const listContainer = css`
   display: flex;
  justify-content: center;
@@ -67,6 +91,19 @@ const transactionDetail = css`
   margin: 0 10px;
   width: 25%;
   text-align: left;
+`
+
+const transactionButton = css`
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 30px;
+  text-align: center;
+  transition: transform .1s;
+  &:hover {
+    transform: scale(1.1)
+  }
 `
 
 const amount = css`
@@ -100,4 +137,6 @@ const squareRed = css`
   border: 1px solid black;
 `
 
-export default graphql(query)(TransactionList)
+export default graphql(mutation)(
+  graphql(query)(TransactionList)
+)
