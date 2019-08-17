@@ -10,10 +10,13 @@ function AppRouter () {
         <nav css={navStyle}>
           <ul >
             <li>
-              <Link to='/'>Home</Link>
+              <Link to='/'>Enter Transaction</Link>
             </li>
             <li>
-              <Link to='/another'>Another route</Link>
+              <Link to='/graph'>Graph Display</Link>
+            </li>
+            <li>
+              <Link to='/history'>Transaction History</Link>
             </li>
           </ul>
         </nav>
@@ -41,11 +44,48 @@ const navStyle = css`
       display: flex;
       flex-direction: row;
       list-style-type: none;
+      justify-content: center;
+      margin-top: 40px;
   }
   
-  & > ul > li:not(:first-child) {
-    margin-left: 16px;
+  & > ul > li {
+    margin: 20px;
+    
+    &:hover {
+      animation: pulse 1s infinite;
+    }
+    
+    & a {
+      text-decoration: none;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 40px;
+      padding: 15px;
+      cursor: pointer;
+      &:hover {
+        background-color: #fff;
+        color: #3a7bd5;
+      }
+    }
   }
+  
+  @keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 1rem 4rem rgba(0,0,0,.5);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: none;
+  }
+}
+  
 `
 
 const contentStyle = css`
