@@ -9,8 +9,8 @@ class AddTransaction extends Component {
     userId: '',
     description: '',
     merchantId: '',
-    creditOrDebit: '',
-    credit: false,
+    creditOrDebit: 'credit',
+    credit: true,
     debit: false,
     amount: 0
   }
@@ -25,20 +25,18 @@ class AddTransaction extends Component {
     })
     if (this.state.creditOrDebit === 'credit') {
       this.setState({
-        debit: true,
-        credit: false
+        debit: false,
+        credit: true
       })
     } else {
       this.setState({
-        credit: true,
-        debit: false
+        credit: false,
+        debit: true
       })
     }
   }
   submitHandler = event => {
-    console.log(this.state.amount)
     event.preventDefault()
-    // console.log(this.state)
     // eslint-disable-next-line react/prop-types
     this.props.mutate({
       variables: {
@@ -58,8 +56,8 @@ class AddTransaction extends Component {
       userId: '',
       description: '',
       merchantId: '',
-      creditOrDebit: '',
-      credit: false,
+      creditOrDebit: 'credit',
+      credit: true,
       debit: false,
       amount: 0
     })
@@ -89,7 +87,7 @@ class AddTransaction extends Component {
               <input checked={this.state.creditOrDebit === 'debit'} onChange={this.changeHandlerRadio} type='radio' value='debit' />
             </label>
             <div css={buttonContainer}>
-              <button css={submitButton} type='submit'>Submit</button>
+              <button css={submitButton} onClick={this.changeHandlerRadio} type='submit'>Submit</button>
             </div>
           </form>
         </div>

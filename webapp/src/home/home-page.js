@@ -7,6 +7,7 @@ import TransactionList from '../components/TransactionList/TransactionList'
 export function Home () {
   return (
     <>
+      <div css={pageTitle}>Welcome!!!</div>
       <div css={pageTitle}>Enter a transaction below.</div>
       <div css={contentLayout}>
         <AddTransaction />

@@ -3,9 +3,8 @@ import { graphql } from 'react-apollo'
 import { css } from '@emotion/core'
 import query from '../../queries/fetchTransactionList'
 import gql from 'graphql-tag'
-import { Link } from 'react-router-dom'
 
-class TransactionList extends Component {
+class DisplayGraph extends Component {
   state = {
     editToggle: false
   }
@@ -19,25 +18,7 @@ class TransactionList extends Component {
     // eslint-disable-next-line react/prop-types
     return this.props.data.transactions.reverse().map(transaction => {
       return (
-        <li css={transactionItem} key={transaction.id}>
-          <span css={transactionDetail}>UserId: {transaction.user_id} </span>
-          <span css={transactionDetail}>Description: {transaction.description} </span>
-          <span css={transactionDetail}>MerchantId: {transaction.merchant_id} </span>
-          <span css={transactionDetail}>Amount: <span css={(transaction.credit ? creditAmount : debitAmount)}>{transaction.amount}</span> </span>
-          <button css={editButton}><Link to={{
-            pathname: `/edit`,
-            state: {
-              id: transaction.id,
-              userId: transaction.user_id,
-              description: transaction.description,
-              merchantId: transaction.merchant_id,
-              credit: transaction.credit,
-              debit: transaction.debit,
-              amount: transaction.amount
-            }
-          }}>Edit</Link></button>
-          <button css={transactionButton} onClick={() => this.onTransactionDelete(transaction.id)}>Delete</button>
-        </li>
+        <div>HELLO</div>
       )
     })
   }
@@ -175,5 +156,5 @@ const squareRed = css`
 `
 
 export default graphql(mutation)(
-  graphql(query)(TransactionList)
+  graphql(query)(DisplayGraph)
 )
