@@ -12,7 +12,7 @@ function AppRouter () {
         <nav css={navStyle}>
           <ul >
             <li>
-              <Link to='/'>Enter Transaction / Home</Link>
+              <Link to='/'>Transaction Home</Link>
             </li>
             <li>
               <Link to='/graph'>Graph Display</Link>

@@ -1,0 +1,6 @@
+﻿user_id,amount,credit,debit,description,merchant_id
+employee1,600,false,true,tvpurchase,bestbuy
+employee2,300,false,true,monitor,bestbuy
+employee3,250,true,false,refund,walmart
+employee4,150,false,true,cleaningsupplies,walmart
+employee5,100,true,false,refund,walmart

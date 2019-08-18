@@ -1,13 +1,14 @@
 import React from 'react'
 
 import { css } from '@emotion/core'
+import DisplayGraph from '../components/DisplayGraph/DisplayGraph'
 
 export function Graph () {
   return (
     <>
       <div css={pageTitle}>See graphs / charts below.</div>
       <div css={contentLayout}>
-        chart
+        <DisplayGraph />
       </div>
     </>
   )
