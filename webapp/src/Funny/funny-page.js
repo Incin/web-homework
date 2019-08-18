@@ -1,14 +1,14 @@
 import React from 'react'
 
 import { css } from '@emotion/core'
-import DisplayGraph from '../components/DisplayGraph/DisplayGraph'
+import RevealMeme from '../components/RevealMeme/RevealMeme'
 
-export function Graph () {
+export function Funny () {
   return (
     <>
-      <div css={pageTitle}>Pie chart.</div>
+      <div css={pageTitle}>I love memes so I couldnt pass this up...</div>
       <div css={contentLayout}>
-        <DisplayGraph />
+        <RevealMeme />
       </div>
     </>
   )

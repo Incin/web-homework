@@ -7,11 +7,24 @@ import Chart from 'react-google-charts'
 class DisplayGraph extends Component {
   state = {
     // eslint-disable-next-line react/prop-types
-    transactionJsonArray: this.props.data.transactions
+    transactionJsonArray: this.props.data.transactions,
+    merchantArray: []
+  }
+  combineDataToState = (item, item2) => {
+    this.setState({
+      merchantArray: item
+    })
+    console.log('heya' + this.state.merchantArray)
   }
   renderData = () => {
+    let tempMerchantArray = []
     // eslint-disable-next-line react/prop-types
-    console.log(this.state.transactionJsonArray)
+    if (this.state.transactionJsonArray != null) {
+      console.log(this.state.transactionJsonArray.forEach(e => {
+        tempMerchantArray.push(e.merchant_id)
+      }))
+    }
+    this.combineDataToState(tempMerchantArray)
   }
   render () {
     return (
@@ -19,7 +32,7 @@ class DisplayGraph extends Component {
         <Chart
           chartType='PieChart'
           data={[
-            ['Task', 'Hours per Day'],
+            ['Merchant', 'Number of Transactions'],
             ['Work', 11],
             ['Eat', 2],
             ['Commute', 2],

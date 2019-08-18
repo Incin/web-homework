@@ -1,14 +1,14 @@
 import React from 'react'
 
 import { css } from '@emotion/core'
-import DisplayGraph from '../components/DisplayGraph/DisplayGraph'
+import TransactionList from '../components/TransactionList/TransactionList'
 
-export function Graph () {
+export function History () {
   return (
     <>
-      <div css={pageTitle}>Pie chart.</div>
+      <div css={pageTitle}>Transaction History</div>
       <div css={contentLayout}>
-        <DisplayGraph />
+        <TransactionList />
       </div>
     </>
   )

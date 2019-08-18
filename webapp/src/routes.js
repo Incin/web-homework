@@ -4,6 +4,8 @@ import { css } from '@emotion/core'
 import { Home } from './home'
 import Edit from './edit/edit-page'
 import { Graph } from './graph'
+import { Funny } from './Funny'
+import { History } from './History'
 
 function AppRouter () {
   return (
@@ -18,7 +20,10 @@ function AppRouter () {
               <Link to='/graph'>Graph Display</Link>
             </li>
             <li>
-              <Link to='/history'>Transaction History</Link>
+              <Link to='/history'>History</Link>
+            </li>
+            <li>
+              <Link to='/funny'>Funny</Link>
             </li>
           </ul>
         </nav>
@@ -26,6 +31,8 @@ function AppRouter () {
           <Route component={Home} exact path='/' />
           <Route component={Edit} exact path='/edit' />
           <Route component={Graph} exact path='/graph' />
+          <Route component={Funny} exact path='/funny' />
+          <Route component={History} exact path='/history' />
         </div>
       </div>
     </Router>

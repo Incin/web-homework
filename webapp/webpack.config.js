@@ -15,7 +15,7 @@ let plugins = [
 ]
 
 const JS_FILE_REGEX = /\.(js|jsx)$/
-const IMAGE_FILE_REGEX = /\.(jpg|jpeg|png|svg|bmp)$/
+const IMAGE_FILE_REGEX = /\.(jpg|jpeg|png|svg|bmp|csv)$/
 const NODE_MODULES_DIR_REGEX = /\/node_modules\/(?!apollo-.*?|react-apollo)/
 const GRAPH_QL_FILE_REGEX = /\.(graphql|gql)$/
 
@@ -29,7 +29,7 @@ const babelConfig = {
 
 const imageUrlConfig = {
   test: IMAGE_FILE_REGEX,
-  use: 'url-loader?limit=25000'
+  use: 'file-loader'
 }
 
 const eslintConfig = {

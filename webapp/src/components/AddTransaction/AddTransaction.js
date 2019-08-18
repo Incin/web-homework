@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import { css } from '@emotion/core'
 import { graphql } from 'react-apollo'
 import query from '../../queries/fetchTransactionList'
+import Papa from 'papaparse'
+import data from './data.csv'
 
 class AddTransaction extends Component {
   state = {
@@ -12,7 +14,50 @@ class AddTransaction extends Component {
     creditOrDebit: 'credit',
     credit: true,
     debit: false,
-    amount: 0
+    amount: 0,
+    seedDb: false
+  }
+  componentDidMount () {
+    // const obj = {}
+    // arrOfArr.forEach(e => {
+    //   obj[e[0]] = e[1]
+    // })
+    if (this.state.seedDb === false) {
+      console.log('im here! ' + this.state.seedDb)
+      let path = data
+      let returnedData = Papa.parse(path, {
+        download: true,
+        dynamicTyping: true,
+        complete: function (results) {
+          console.log(JSON.stringify(results))
+          console.log(results.data)
+          let obj = {}
+          results.data.forEach(e => {
+            obj[e[0]] = e[0]
+            let user = obj.user_id
+            // eslint-disable-next-line react/prop-types
+            this.props.mutate({
+              variables: {
+                user_id: user,
+                description: this.state.description,
+                merchant_id: this.state.merchantId,
+                debit: this.state.debit,
+                credit: this.state.credit,
+                amount: parseFloat(this.state.amount)
+              },
+              refetchQueries: [{ query }]
+            })
+          })
+          console.log(obj)
+          return results.data
+        }
+      })
+      console.log(returnedData)
+      // eslint-disable-next-line react/prop-types
+      this.resetFormHandler()
+      this.setState({ seedDb: true })
+    }
+    console.log('im here! ' + this.state.seedDb)
   }
   changeHandler = event => {
     this.setState({
