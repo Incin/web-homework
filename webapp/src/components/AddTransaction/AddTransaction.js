@@ -14,50 +14,40 @@ class AddTransaction extends Component {
     creditOrDebit: 'credit',
     credit: true,
     debit: false,
-    amount: 0,
-    seedDb: false
+    amount: 0
   }
-  componentDidMount () {
-    // const obj = {}
-    // arrOfArr.forEach(e => {
-    //   obj[e[0]] = e[1]
-    // })
-    if (this.state.seedDb === false) {
-      console.log('im here! ' + this.state.seedDb)
-      let path = data
-      let returnedData = Papa.parse(path, {
-        download: true,
-        dynamicTyping: true,
-        complete: function (results) {
-          console.log(JSON.stringify(results))
-          console.log(results.data)
-          let obj = {}
-          results.data.forEach(e => {
-            obj[e[0]] = e[0]
-            let user = obj.user_id
-            // eslint-disable-next-line react/prop-types
-            this.props.mutate({
-              variables: {
-                user_id: user,
-                description: this.state.description,
-                merchant_id: this.state.merchantId,
-                debit: this.state.debit,
-                credit: this.state.credit,
-                amount: parseFloat(this.state.amount)
-              },
-              refetchQueries: [{ query }]
-            })
+  seedDb = () => {
+    let props = this.props
+    // load data from csv
+    // console.log('im here! ' + this.state.seedDb)
+    let path = data
+    Papa.parse(path, {
+      download: true,
+      dynamicTyping: true,
+      header: true,
+      skipEmptyLines: true,
+      // complete: function (results) {
+      //   return results
+      // }
+      complete: function (results) {
+        results.data.forEach(e => {
+          // eslint-disable-next-line react/prop-types
+          props.mutate({
+            variables: {
+              user_id: e.user_id,
+              description: e.description,
+              merchant_id: e.merchant_id,
+              debit: e.debit,
+              credit: e.credit,
+              amount: parseFloat(e.amount)
+            },
+            refetchQueries: [{ query }]
           })
-          console.log(obj)
-          return results.data
-        }
-      })
-      console.log(returnedData)
-      // eslint-disable-next-line react/prop-types
-      this.resetFormHandler()
-      this.setState({ seedDb: true })
-    }
-    console.log('im here! ' + this.state.seedDb)
+        })
+      }
+    })
+    // eslint-disable-next-line react/prop-types
+    this.resetFormHandler()
   }
   changeHandler = event => {
     this.setState({
@@ -111,6 +101,7 @@ class AddTransaction extends Component {
   render () {
     return (
       <>
+        <button css={submitButton} onClick={this.seedDb}>Seed Database</button>
         <div css={transactionForm}>
           <form onSubmit={this.submitHandler}>
             <label css={formItemTitle}>UserId

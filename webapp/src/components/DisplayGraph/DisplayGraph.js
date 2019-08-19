@@ -10,21 +10,21 @@ class DisplayGraph extends Component {
     transactionJsonArray: this.props.data.transactions,
     merchantArray: []
   }
-  combineDataToState = (item, item2) => {
-    this.setState({
-      merchantArray: item
-    })
-    console.log('heya' + this.state.merchantArray)
-  }
+  // combineDataToState = (item, item2) => {
+  //   this.setState({
+  //     merchantArray: item
+  //   })
+  //   console.log('heya' + this.state.merchantArray)
+  // }
   renderData = () => {
-    let tempMerchantArray = []
-    // eslint-disable-next-line react/prop-types
-    if (this.state.transactionJsonArray != null) {
-      console.log(this.state.transactionJsonArray.forEach(e => {
-        tempMerchantArray.push(e.merchant_id)
-      }))
-    }
-    this.combineDataToState(tempMerchantArray)
+    // let tempMerchantArray = []
+    // // eslint-disable-next-line react/prop-types
+    // if (this.state.transactionJsonArray != null) {
+    //   console.log(this.state.transactionJsonArray.forEach(e => {
+    //     tempMerchantArray.push(e.merchant_id)
+    //   }))
+    // }
+    // this.combineDataToState(tempMerchantArray)
   }
   render () {
     return (
