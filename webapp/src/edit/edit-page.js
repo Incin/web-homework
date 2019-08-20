@@ -4,24 +4,6 @@ import { css } from '@emotion/core'
 import ModifyTransaction from '../components/ModifyTransaction/ModifyTransaction'
 
 class Edit extends Component {
-  // componentDidMount () {
-  //   // eslint-disable-next-line react/prop-types
-  //   this.id =
-  //   // eslint-disable-next-line react/prop-types
-  //   this.userId = this.props.location.state.userId
-  //   // eslint-disable-next-line react/prop-types
-  //   this.description = this.props.location.state.description
-  //   // eslint-disable-next-line react/prop-types
-  //   this.merchantId = this.props.location.state.merchantId
-  //   // eslint-disable-next-line react/prop-types
-  //   this.creditOrDebit = this.props.location.state.creditOrDebit
-  //   // eslint-disable-next-line react/prop-types
-  //   this.credit = this.props.location.state.credit
-  //   // eslint-disable-next-line react/prop-types
-  //   this.debit = this.props.location.state.debit
-  //   // eslint-disable-next-line react/prop-types
-  //   this.amount = this.props.location.state.amount
-  // }
   state = {
     // eslint-disable-next-line react/prop-types
     id: this.props.location.state.id,
@@ -41,8 +23,6 @@ class Edit extends Component {
     amount: this.props.location.state.amount
   }
   render () {
-    console.log(this.props)
-    console.log(this.state)
     return (
       <>
         <div css={pageTitle}>Editing transaction # {this.state.id} below.</div>

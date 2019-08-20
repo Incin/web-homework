@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
-// import { css } from '@emotion/core'
 import query from '../../queries/fetchTransactionList'
 import Chart from 'react-google-charts'
 
@@ -8,46 +7,53 @@ class DisplayGraph extends Component {
   state = {
     // eslint-disable-next-line react/prop-types
     transactionJsonArray: this.props.data.transactions,
-    merchantArray: []
+    merchantArray: [],
+    countOne: 0,
+    countTwo: 0
   }
-  // combineDataToState = (item, item2) => {
-  //   this.setState({
-  //     merchantArray: item
-  //   })
-  //   console.log('heya' + this.state.merchantArray)
-  // }
-  renderData = () => {
-    // let tempMerchantArray = []
-    // // eslint-disable-next-line react/prop-types
-    // if (this.state.transactionJsonArray != null) {
-    //   console.log(this.state.transactionJsonArray.forEach(e => {
-    //     tempMerchantArray.push(e.merchant_id)
-    //   }))
-    // }
-    // this.combineDataToState(tempMerchantArray)
+  componentDidMount = () => {
+    // eslint-disable-next-line react/prop-types
+    let object = this.props.data.transactions
+    let countOne = 0
+    let countTwo = 0
+    // eslint-disable-next-line react/prop-types
+    for (let item in object) {
+      // eslint-disable-next-line react/prop-types
+      if (object[item].merchant_id === 'bestbuy') {
+        countTwo++
+      }
+      // eslint-disable-next-line react/prop-types
+      if (object[item].merchant_id === 'walmart') {
+        countOne++
+      }
+    }
+    this.setState({
+      countOne: countOne,
+      countTwo: countTwo
+    })
   }
   render () {
+    // eslint-disable-next-line react/prop-types
     return (
       <>
         <Chart
           chartType='PieChart'
           data={[
             ['Merchant', 'Number of Transactions'],
-            ['Work', 11],
-            ['Eat', 2],
-            ['Commute', 2],
-            ['Watch TV', 2],
-            ['Sleep', 7]
+            ['Bestbuy', this.state.countTwo],
+            ['Walmart', this.state.countOne]
           ]}
           height={'600px'}
           loader={<div>Loading Chart</div>}
           options={{
-            title: 'Merchants with most transactions'
+            legend: 'none',
+            pieSliceText: 'label',
+            pieStartAngle: 100,
+            title: 'See if walmart or bestbuy has more transactions. Enter a transaction with walmart or bestbuy or seed the database.'
           }}
           rootProps={{ 'data-testid': '1' }}
           width={'700px'}
         />
-        {this.renderData()}
       </>
     )
   }

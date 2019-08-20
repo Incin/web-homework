@@ -19,16 +19,12 @@ class AddTransaction extends Component {
   seedDb = () => {
     let props = this.props
     // load data from csv
-    // console.log('im here! ' + this.state.seedDb)
     let path = data
     Papa.parse(path, {
       download: true,
       dynamicTyping: true,
       header: true,
       skipEmptyLines: true,
-      // complete: function (results) {
-      //   return results
-      // }
       complete: function (results) {
         results.data.forEach(e => {
           // eslint-disable-next-line react/prop-types

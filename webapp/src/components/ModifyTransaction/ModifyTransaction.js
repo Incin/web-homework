@@ -39,7 +39,6 @@ class EditTransaction extends Component {
   }
 
   changeHandler = event => {
-    console.log(this.state)
     this.setState({
       [event.target.name]: event.target.value
     })
