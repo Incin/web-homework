@@ -1,17 +1,13 @@
 import React from 'react'
 
 import { css } from '@emotion/core'
-import AddTransaction from '../components/AddTransaction/AddTransaction'
 import TransactionList from '../components/TransactionList/TransactionList'
 
-export function Home () {
+export function History () {
   return (
     <>
-      <div css={pageTitle}>Welcome!!!</div>
-      <div css={pageTitle}>Enter a transaction below.</div>
+      <div css={pageTitle}>Transaction History</div>
       <div css={contentLayout}>
-        <AddTransaction />
-        <div css={pageTitle}>Transaction History</div>
         <TransactionList />
       </div>
     </>
