@@ -49,7 +49,7 @@ class DisplayGraph extends Component {
             legend: 'none',
             pieSliceText: 'label',
             pieStartAngle: 100,
-            title: 'See if walmart or bestbuy has more transactions. Enter a transaction with walmart or bestbuy or seed the database.'
+            title: 'See if walmart or bestbuy has more transactions. Enter a transaction with walmart or bestbuy as the merchantId or seed the database.'
           }}
           rootProps={{ 'data-testid': '1' }}
           width={'700px'}
